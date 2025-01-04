@@ -111,3 +111,7 @@ body {
   height: 145%;
   padding-left: 30px;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}

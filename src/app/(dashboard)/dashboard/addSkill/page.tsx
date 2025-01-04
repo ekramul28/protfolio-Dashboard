@@ -154,7 +154,7 @@ const AddSkill = () => {
               </option>
               <option value="Beginner">Beginner</option>
               <option value="Intermediate">Intermediate</option>
-              <option value="Advanced">Advanced</option>
+              <option value="Expert">Expert</option>
             </select>
           </div>
 

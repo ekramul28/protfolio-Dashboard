@@ -91,7 +91,7 @@ const AddProject = () => {
   };
 
   return (
-    <div className=" bg-gray-50 rounded-lg shadow-lg mt-2">
+    <div className=" w-full bg-gray-50 rounded-lg shadow-lg mt-2">
       {/* <h1 className="text-2xl font-bold pt-4 text-gray-800 text-center">
         Add a New Project
       </h1>
