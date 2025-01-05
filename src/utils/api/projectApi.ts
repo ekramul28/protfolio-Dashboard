@@ -2,7 +2,7 @@
 export async function fetchProjects() {
   try {
     const res = await fetch(
-      "https://protfolio-web-server-liart.vercel.app/projects",
+      "https://protfolio-server-dun.vercel.app/projects",
       {
         cache: "no-store", // Avoid caching for always fresh data
       }
@@ -22,7 +22,7 @@ export async function fetchProjects() {
 export async function fetchSingleProjects(id: string) {
   try {
     const res = await fetch(
-      `https://protfolio-web-server-liart.vercel.app/projects/${id}`,
+      `https://protfolio-server-dun.vercel.app/projects/${id}`,
       {
         cache: "no-store",
       }

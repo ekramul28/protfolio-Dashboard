@@ -1,7 +1,7 @@
 export const fetchSkillsLevel2 = async () => {
   try {
     const level2Res = await fetch(
-      "https://protfolio-web-server-liart.vercel.app/level",
+      "https://protfolio-server-dun.vercel.app/level",
       {
         cache: "no-store", // Avoid caching for always fresh data
       }

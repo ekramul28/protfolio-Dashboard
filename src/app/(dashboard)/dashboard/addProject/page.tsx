@@ -28,17 +28,13 @@ const AddProject = () => {
     setMessage("");
 
     const data = {
-      projectName,
+      title: projectName,
       description,
       startDate,
       endDate,
-      frontendTechnologies: frontendTechnologies
-        .split(",")
-        .map((tech) => tech.trim()), // Convert comma-separated string into an array
-      backendTechnologies: backendTechnologies
-        .split(",")
-        .map((tech) => tech.trim()),
-      images,
+      frontend: frontendTechnologies.split(",").map((tech) => tech.trim()), // Convert comma-separated string into an array
+      backend: backendTechnologies.split(",").map((tech) => tech.trim()),
+      image: images,
       links: {
         githubFrontend,
         githubBackend,
@@ -48,13 +44,13 @@ const AddProject = () => {
     };
 
     console.log(data);
-
     try {
       setLoading(true);
 
       // Replace `API_URL` with your actual backend endpoint
       const response = await fetch(
-        "https://protfolio-web-server-liart.vercel.app/projects",
+        // "https://protfolio-server-dun.vercel.app/projects",
+        "http://localhost:5000/projects",
         {
           method: "POST",
           headers: {

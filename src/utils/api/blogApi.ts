@@ -1,7 +1,7 @@
 export const fetchBlog = async () => {
   try {
     const blogRes = await fetch(
-      "https://protfolio-web-server-liart.vercel.app/blogs"
+      "https://protfolio-server-dun.vercel.app/blogs"
     );
     if (!blogRes.ok) {
       throw new Error(`HTTP error! status: ${blogRes.status}`);

@@ -1,7 +1,7 @@
 export const fetchSkills = async () => {
   try {
     const level1Res = await fetch(
-      "https://protfolio-web-server-liart.vercel.app/skills"
+      "https://protfolio-server-dun.vercel.app/skills"
     );
     if (!level1Res.ok) {
       throw new Error(`HTTP error! status: ${level1Res.status}`);

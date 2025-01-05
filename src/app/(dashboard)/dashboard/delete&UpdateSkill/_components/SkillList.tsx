@@ -39,7 +39,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills, level }) => {
 
     if (level === 1) {
       await fetch(
-        `https://protfolio-web-server-liart.vercel.app/skills/${updatedSkill?._id}`,
+        `https://protfolio-server-dun.vercel.app/skills/${updatedSkill?._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -52,7 +52,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills, level }) => {
     }
     if (level === 2) {
       await fetch(
-        `https://protfolio-web-server-liart.vercel.app/level/${updatedSkill?._id}`,
+        `https://protfolio-server-dun.vercel.app/level/${updatedSkill?._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills, level }) => {
     if (level === 1) {
       if (currentSkill) {
         await fetch(
-          `https://protfolio-web-server-liart.vercel.app/skills/${currentSkill._id}`,
+          `https://protfolio-server-dun.vercel.app/skills/${currentSkill._id}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
@@ -95,7 +95,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills, level }) => {
     if (level === 2) {
       if (currentSkill) {
         await fetch(
-          `https://protfolio-web-server-liart.vercel.app/level/${currentSkill._id}`,
+          `https://protfolio-server-dun.vercel.app/level/${currentSkill._id}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },

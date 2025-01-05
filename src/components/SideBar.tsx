@@ -16,6 +16,7 @@ const SideBar = () => {
     { name: "AddSkill", href: "/dashboard/addSkill" },
     { name: "AddProject", href: "/dashboard/addProject" },
     { name: "Delete&UpdateSkill", href: "/dashboard/delete&UpdateSkill" },
+    { name: "Delete&UpdateProject", href: "/dashboard/delete&UpdateProject" },
   ];
 
   return (
