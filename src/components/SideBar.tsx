@@ -12,11 +12,13 @@ const SideBar = () => {
 
   // Navigation items array
   const navItems = [
-    { name: "AddBlog", href: "/dashboard" },
+    { name: "Dashboard", href: "/dashboard" },
+    { name: "AddBlog", href: "/dashboard/addBlog" },
     { name: "AddSkill", href: "/dashboard/addSkill" },
     { name: "AddProject", href: "/dashboard/addProject" },
-    { name: "Delete&UpdateSkill", href: "/dashboard/delete&UpdateSkill" },
-    { name: "Delete&UpdateProject", href: "/dashboard/delete&UpdateProject" },
+    { name: "Delete&UpdateSkill", href: "/dashboard/deleteUpdateSkill" },
+    { name: "Delete&UpdateProject", href: "/dashboard/deleteUpdateProject" },
+    { name: "BlogUpdateAndDelete", href: "/dashboard/BlogUpdateAndDelete" },
   ];
 
   return (
