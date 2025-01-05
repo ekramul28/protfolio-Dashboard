@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 
 interface Skill {
-  id: string;
+  _id: string;
   name: string;
   level: string;
 }
@@ -20,6 +20,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills, level }) => {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [currentSkill, setCurrentSkill] = useState<Skill | null>(null);
 
+  console.log(skillList);
   // Open the update modal
   const openUpdateModal = (skill: Skill) => {
     setCurrentSkill(skill);
@@ -34,20 +35,40 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills, level }) => {
 
   // Handle update skill
   const handleUpdateSkill = async (updatedSkill: Skill) => {
-    const res = await fetch(
-      `https://protfolio-web-server-liart.vercel.app/skills/${updatedSkill?.id}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ skill: updatedSkill, level }),
-      }
-    );
+    console.log({ updatedSkill });
 
-    console.log(res.json());
+    if (level === 1) {
+      await fetch(
+        `https://protfolio-web-server-liart.vercel.app/skills/${updatedSkill?._id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: updatedSkill.name,
+            level: updatedSkill.level,
+          }),
+        }
+      );
+    }
+    if (level === 2) {
+      await fetch(
+        `https://protfolio-web-server-liart.vercel.app/level/${updatedSkill?._id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: updatedSkill.name,
+            level: updatedSkill.level,
+          }),
+        }
+      );
+    }
+
+    console.log({ skill: updatedSkill.name, level: updatedSkill.level });
 
     // Update local state
     setSkillList((prev) =>
-      prev.map((s) => (s.id === updatedSkill.id ? updatedSkill : s))
+      prev.map((s) => (s._id === updatedSkill._id ? updatedSkill : s))
     );
 
     setUpdateModalOpen(false);
@@ -56,15 +77,35 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills, level }) => {
 
   // Handle delete skill
   const handleDeleteSkill = async () => {
-    if (currentSkill) {
-      await fetch(`https://protfolio-web-server-liart.vercel.app/skills`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ skillId: currentSkill.id, level }),
-      });
+    if (level === 1) {
+      if (currentSkill) {
+        await fetch(
+          `https://protfolio-web-server-liart.vercel.app/skills/${currentSkill._id}`,
+          {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ skillId: currentSkill._id, level }),
+          }
+        );
 
-      // Update local state
-      setSkillList((prev) => prev.filter((s) => s.id !== currentSkill.id));
+        // Update local state
+        setSkillList((prev) => prev.filter((s) => s._id !== currentSkill._id));
+      }
+    }
+    if (level === 2) {
+      if (currentSkill) {
+        await fetch(
+          `https://protfolio-web-server-liart.vercel.app/level/${currentSkill._id}`,
+          {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ skillId: currentSkill._id, level }),
+          }
+        );
+
+        // Update local state
+        setSkillList((prev) => prev.filter((s) => s._id !== currentSkill._id));
+      }
     }
 
     setDeleteModalOpen(false);
@@ -76,7 +117,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills, level }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {skillList.map((skill) => (
           <div
-            key={skill.id}
+            key={skill._id}
             className="flex items-center justify-between gap-4 p-4 bg-white shadow-md rounded-lg hover:shadow-lg transition duration-300"
           >
             <div>
