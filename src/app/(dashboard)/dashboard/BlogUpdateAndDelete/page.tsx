@@ -42,6 +42,7 @@ const BlogUpDe: React.FC = () => {
     return <p className="text-red-500">{error}</p>;
   }
 
+  console.log(blogs);
   return (
     <div>
       <BlogList blogs={blogs} />

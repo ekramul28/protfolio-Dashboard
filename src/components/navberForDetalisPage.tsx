@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const NavbarDetailsPage: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,10 +12,12 @@ const NavbarDetailsPage: React.FC = () => {
     setIsLoggedIn(!!token); // Update login status
   }, []);
 
+  const router = useRouter();
   // Handle logout by removing the token from localStorage
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false); // Update login status
+    router.push("/");
   };
 
   // Toggle dark mode
