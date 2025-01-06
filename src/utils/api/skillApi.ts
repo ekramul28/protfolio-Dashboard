@@ -1,7 +1,10 @@
 export const fetchSkills = async () => {
   try {
     const level1Res = await fetch(
-      "https://protfolio-server-dun.vercel.app/skills"
+      "https://protfolio-server-dun.vercel.app/skills",
+      {
+        cache: "no-store", // Avoid caching for always fresh data
+      }
     );
     if (!level1Res.ok) {
       throw new Error(`HTTP error! status: ${level1Res.status}`);

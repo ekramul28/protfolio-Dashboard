@@ -4,7 +4,7 @@ import "quill/dist/quill.snow.css";
 import Quill from "quill";
 
 interface BlogEditorProps {
-  onSave: (content: string, title: string, imageUrl: string) => void;
+  onSave?: (content: string, title: string, imageUrl: string) => void;
   initialContent?: string;
   initialTitle?: string;
   initialImageUrl?: string;
@@ -87,7 +87,9 @@ const BlogEditor: React.FC<BlogEditorProps> = ({
         }
         setTitle("");
         setImageUrl("");
-        onSave(content, title, imageUrl); // Trigger the onSave callback
+        if (onSave) {
+          onSave(content, title, imageUrl); // Trigger the onSave callback
+        }
       } catch (error) {
         console.error("Error saving/updating blog:", error);
         alert("Error saving/updating the blog. Please try again.");
