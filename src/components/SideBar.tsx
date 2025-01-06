@@ -12,7 +12,7 @@ const SideBar = () => {
 
   // Navigation items array
   const navItems = [
-    { name: "Dashboard", href: "/dashboard" },
+    { name: "Dashboard", href: "/" },
     { name: "AddBlog", href: "/dashboard/addBlog" },
     { name: "AddSkill", href: "/dashboard/addSkill" },
     { name: "AddProject", href: "/dashboard/addProject" },

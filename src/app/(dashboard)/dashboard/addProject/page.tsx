@@ -50,7 +50,7 @@ const AddProject = () => {
       // Replace `API_URL` with your actual backend endpoint
       const response = await fetch(
         // "https://protfolio-server-dun.vercel.app/projects",
-        "http://localhost:5000/projects",
+        "https://protfolio-server-dun.vercel.app/projects",
         {
           method: "POST",
           headers: {

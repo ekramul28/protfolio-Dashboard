@@ -1,20 +1,27 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import "quill/dist/quill.snow.css";
 import Quill from "quill";
 
 interface BlogEditorProps {
-  onSave: (content: string) => void;
-  initialContent?: string; // Optional prop for initial content
-  blogId?: string | null; // Optional prop for the blog ID (only used when updating)
+  onSave: (content: string, title: string, imageUrl: string) => void;
+  initialContent?: string;
+  initialTitle?: string;
+  initialImageUrl?: string;
+  blogId?: string | null;
 }
 
 const BlogEditor: React.FC<BlogEditorProps> = ({
   onSave,
   initialContent = "",
-  blogId, // Accept blogId prop to differentiate between creating or updating
+  initialTitle = "",
+  initialImageUrl = "",
+  blogId,
 }) => {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const [quill, setQuill] = useState<Quill | null>(null);
+  const [title, setTitle] = useState(initialTitle);
+  const [imageUrl, setImageUrl] = useState(initialImageUrl);
 
   useEffect(() => {
     if (editorRef.current && !quill) {
@@ -44,11 +51,11 @@ const BlogEditor: React.FC<BlogEditorProps> = ({
   const handleSave = async () => {
     const content = quill?.root.innerHTML || "";
 
-    if (content.trim()) {
+    if (content.trim() && title.trim() && imageUrl.trim()) {
       try {
         const url = blogId
-          ? `http://localhost:5000/blogs/${blogId}` // Update the existing blog if blogId is provided
-          : "http://localhost:5000/blogs"; // Otherwise create a new blog
+          ? `https://protfolio-server-dun.vercel.app/blogs/${blogId}` // Update the existing blog if blogId is provided
+          : "https://protfolio-server-dun.vercel.app/blogs"; // Otherwise create a new blog
 
         const method = blogId ? "PUT" : "POST"; // Use PUT for update, POST for create
 
@@ -57,7 +64,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ content }),
+          body: JSON.stringify({ content, title, imageUrl }),
         });
 
         if (!response.ok) {
@@ -78,21 +85,39 @@ const BlogEditor: React.FC<BlogEditorProps> = ({
         if (quill) {
           quill.root.innerHTML = "";
         }
-        onSave(content); // Trigger the onSave callback
+        setTitle("");
+        setImageUrl("");
+        onSave(content, title, imageUrl); // Trigger the onSave callback
       } catch (error) {
         console.error("Error saving/updating blog:", error);
         alert("Error saving/updating the blog. Please try again.");
       }
     } else {
-      alert("Blog content cannot be empty!");
+      alert("Blog content, title, and image URL cannot be empty!");
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-4xl mx-auto p-6 space-y-6 bg-white shadow-lg rounded-lg ">
       <h2 className="text-2xl font-semibold text-gray-800">
         {blogId ? "Update Your Blog Post" : "Write Your Blog Post"}
       </h2>
+      <div className="space-y-4">
+        <input
+          type="text"
+          placeholder="Enter blog title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-md"
+        />
+        <input
+          type="text"
+          placeholder="Enter image URL"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-md"
+        />
+      </div>
       <div className="relative">
         <div
           ref={editorRef}
